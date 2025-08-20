@@ -1,0 +1,23 @@
+kind: Job  # Must be "Job" not "job"
+apiVersion: batch/v1  # Note: Jobs use batch/v1, not apps/v1
+metadata:
+  name: demo-job
+  namespace: nginx
+spec:
+  # Job-specific fields
+  completions: 1          # Number of successful completions needed
+  parallelism: 1          # Number of pods running in parallel
+  backoffLimit: 3         # Number of retries before marking job as failed
+  template:
+    metadata:
+      name: demo-job-pod
+      labels:
+        app: batch-task
+    spec:
+      restartPolicy: Never  # Jobs require restartPolicy: Never or OnFailure
+      containers:
+      - name: nginx
+        image: busybox:latest
+        command: ["sh", "-c", "echo Hello Dexter! && sleep 10"]
+      
+

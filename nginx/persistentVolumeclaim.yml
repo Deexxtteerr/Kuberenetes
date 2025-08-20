@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: local-pvc
+  namespace: nginx
+spec:
+  accessModes:
+    - ReadWriteOnce  # Must match or be subset of PV access modes
+  resources:
+    requests:
+      storage: 1Gi  # Amount of storage requested
+  storageClassName: local-storage  # Must match PV storageClassName
+  

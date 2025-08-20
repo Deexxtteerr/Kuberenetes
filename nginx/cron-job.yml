@@ -1,0 +1,43 @@
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: minute-backup
+  namespace: nginx  # Fixed: was "namespaces"
+spec:
+  schedule: "* * * * *"  # Fixed: removed extra spaces
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: minute-backup
+          labels:
+            app: minute-backup
+        spec:  # Fixed: proper indentation
+          restartPolicy: OnFailure  # Fixed: moved to correct location
+          containers:
+            - name: backup-container
+              image: busybox
+              command:
+                - sh
+                - -c  # Fixed: added dash
+                - |   # Fixed: changed from > to |
+                  echo "Backup Started";
+                  mkdir -p /backups &&
+                  mkdir -p /data &&
+                  cp -r /demo-data/* /backups/
+                  echo "backup completed";
+              volumeMounts:
+                - name: data-volume  # Fixed: name consistency
+                  mountPath: /demo-data
+                - name: backup-volume
+                  mountPath: /backups
+          volumes:  # Fixed: moved to correct location and indentation
+            - name: data-volume
+              hostPath:  # Fixed: capitalization
+                path: /demo-data
+                type: DirectoryOrCreate
+            - name: backup-volume
+              hostPath:  # Fixed: capitalization
+                path: /backups
+                type: DirectoryOrCreate
+

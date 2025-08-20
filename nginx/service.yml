@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-service
+  namespace: nginx
+spec:
+  selector:
+    app: nginx  # Fixed indentation - should be indented under selector
+  ports:        # Fixed spelling: "port" should be "ports" (plural)
+    - protocol: TCP      # Fixed spelling: "porotocol" should be "protocol"
+      port: 80
+      targetPort: 80     # Fixed spelling: "targetport" should be "targetPort" (camelCase)
+  type: ClusterIP
+

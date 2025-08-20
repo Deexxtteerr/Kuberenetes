@@ -1,0 +1,21 @@
+kind: DaemonSet  # Must be "DaemonSet" not "Daemonset"
+apiVersion: apps/v1
+metadata:
+  name: nginx-daemonset  # Changed name to reflect it's a DaemonSet
+  namespace: nginx
+spec:
+  # No replicas field - DaemonSet runs one pod per node automatically
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+

@@ -1,0 +1,19 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: local-pv
+  labels:
+    app: local  # Fixed: proper indentation under labels
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain  # Fixed: spelling error
+  storageClassName: local-storage
+  hostPath:  # Fixed: capital P
+    path: /mnt/data
+    type: DirectoryOrCreate  # Added: required type field
+ 
+
+

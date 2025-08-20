@@ -1,0 +1,25 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: nginx-replicasets
+  namespace: nginx  # Fixed: was "namespac"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:  # Fixed: moved under spec with proper indentation
+    metadata:
+      name: nginx-rep-pod
+      labels:
+        app: nginx  # Fixed: proper indentation
+    spec:  # Fixed: moved under template with proper indentation
+      containers:  # Fixed: moved under spec with proper indentation
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80  # Fixed: added space after dash
+
+
+
+
