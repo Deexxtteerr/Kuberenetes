@@ -121,10 +121,10 @@ kubectl get all -n nginx
 ### 4️⃣ Access the Application
 ```bash
 # Port forward to access nginx
-kubectl port-forward service/nginx-service -n nginx 8080:80 --address=0.0.0.0
+kubectl port-forward service/nginx-service -n nginx 81:80 --address=0.0.0.0
 
-# Access via browser: http://localhost:8080
-# Or from external: http://YOUR-IP:8080
+# Access via browser: http://localhost:81
+# Or from external: http://YOUR-IP:81
 ```
 
 ## 📚 Learning Objectives
@@ -222,15 +222,15 @@ kubectl run test-pod --rm -i --tty --image=busybox -- /bin/sh
 # Inside pod: wget -qO- nginx-service.nginx.svc.cluster.local
 
 # Test external access
-curl localhost:8080  # After port-forward
+curl localhost:81  # After port-forward
 ```
 
 ## 🌐 Access Methods
 
 ### Method 1: Port Forwarding (Recommended for Development)
 ```bash
-kubectl port-forward service/nginx-service -n nginx 8080:80 --address=0.0.0.0
-# Access: http://localhost:8080
+kubectl port-forward service/nginx-service -n nginx 81:80 --address=0.0.0.0
+# Access: http://localhost:81
 ```
 
 ### Method 2: NodePort Service
@@ -358,11 +358,11 @@ kubectl run debug --rm -i --tty --image=busybox -- /bin/sh
 #### 🚨 **Port Forward Issues**
 ```bash
 # Check if port is already in use
-sudo lsof -i :8080
-sudo netstat -tlnp | grep :8080
+sudo lsof -i :81
+sudo netstat -tlnp | grep :81
 
 # Use different port
-kubectl port-forward service/nginx-service -n nginx 8081:80
+kubectl port-forward service/nginx-service -n nginx 8080:80
 ```
 
 #### 🚨 **Cluster Creation Failed**
@@ -384,8 +384,8 @@ kind create cluster --config kind-cluster/config.yml --name nginx-cluster
 ## 🎯 **Live Demo**
 
 This project demonstrates a fully functional nginx deployment accessible via:
-- **Local Access**: `http://localhost:8080` (with port-forward)
-- **External Access**: `http://YOUR-IP:8080` (with proper security group configuration)
+- **Local Access**: `http://localhost:81` (with port-forward)
+- **External Access**: `http://YOUR-IP:81` (with proper security group configuration)
 
 ### 📊 **Project Stats**
 - **Total YAML Files**: 10
